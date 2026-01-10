@@ -13,7 +13,21 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        /*
+        ok my idea is a loop with runs length amout of times
+        every loop it will add (number*length) as a new double in a list
+        then return it
+        */
+
+        List<double> result = new List<double>(); //creates list
+
+        for (int i = 0; i < length; i++) 
+        {
+            result.Add(number*(i+1));//+1 makes it so that it doesn't start at 0 and actually gets the correct amount of multiples
+        }
+
+
+        return result.ToArray();
     }
 
     /// <summary>
@@ -29,5 +43,16 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        /*
+        get the range of the list (amount) items from the right 
+        and add it to a new list
+        */
+        List<int> result = new List<int>();
+        result.AddRange(data.GetRange(data.Count-amount,data.Count));
+        //then get the range of the list up until then and add it to the end of the new one
+        result.AddRange(data.GetRange(0, data.Count-amount));
+        // then set the old list to the new list
+        data = result;
     }
 }

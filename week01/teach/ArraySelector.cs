@@ -11,6 +11,35 @@ public static class ArraySelector
 
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        return [];
+        List<int> neww = new List<int>();
+        foreach (int i in select)
+        {
+            neww.Add (i);
+        }
+        List<int> firstList = new List<int> ();
+        for (int i = list1.Length-1; i>-1; i--)
+        {
+            firstList.Add (list1[i]);
+        }
+        List<int> secondList = new List<int> ();
+        for (int i = list2.Length-1; i>-1; i--)
+        {
+            secondList.Add (list2[i]);
+        }
+        List<int> resulted = new List<int> ();
+        foreach (int i in neww)
+        {
+            if (i == 1)
+            {
+                resulted.Add (firstList.Last ());
+                firstList.RemoveAt(firstList.Count - 1);
+            }
+            if (i == 2)
+            {
+                resulted.Add (secondList.Last ());
+                secondList.RemoveAt (secondList.Count - 1);
+            }
+        }
+        return resulted.ToArray();
     }
 }
