@@ -49,10 +49,12 @@ public static class Arrays
         and add it to a new list
         */
         List<int> result = new List<int>();
-        result.AddRange(data.GetRange(data.Count-amount,data.Count));
+        result.AddRange(data.GetRange(data.Count()-amount,amount));
         //then get the range of the list up until then and add it to the end of the new one
-        result.AddRange(data.GetRange(0, data.Count-amount));
+        result.AddRange(data.GetRange(0, data.Count()-amount));
         // then set the old list to the new list
-        data = result;
+
+        data.Clear();
+        data.AddRange(result);
     }
 }
