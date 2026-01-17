@@ -5,17 +5,47 @@
 public class CustomerService {
     public static void Run() {
         // Example code to see what's in the customer service queue:
-        // var cs = new CustomerService(10);
-        // Console.WriteLine(cs);
+        Console.WriteLine("give me a number");
+        int qeueSize = Convert.ToInt16(Console.ReadLine());
+        CustomerService size = new CustomerService(qeueSize);
+
+        string inputing = "";
+        do
+        {
+            Console.WriteLine("1. Add customer");
+            Console.WriteLine("2. Serve customer");
+            Console.WriteLine("3. see details");
+            Console.WriteLine("4. end");
+            
+            inputing = Console.ReadLine();
+
+            if (inputing == "1")
+            {
+                size.AddNewCustomer();
+            }
+            else if (inputing == "2")
+            {
+                size.ServeCustomer();
+            }
+            else if(inputing == "3")
+            {
+                Console.WriteLine(size.ToString());
+            }
+        }
+        while (inputing != "4");
+        
 
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: serve a customer after adding a dude
+        // Expected Result: he gets removed and served
         Console.WriteLine("Test 1");
 
-        // Defect(s) Found: 
+        
+        // Defect(s) Found: when trying to serve a customer, it would remove the instance of it before trying to access it to display the customers name.
+        // fix was we made the disiplay of the name happen before the removal
+        
 
         Console.WriteLine("=================");
 
@@ -88,9 +118,10 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
         var customer = _queue[0];
         Console.WriteLine(customer);
+        _queue.RemoveAt(0);
+
     }
 
     /// <summary>

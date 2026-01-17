@@ -21,6 +21,7 @@ public class TakingTurnsQueue
     public void AddPerson(string name, int turns)
     {
         var person = new Person(name, turns);
+
         _people.Enqueue(person);
     }
 
@@ -45,6 +46,11 @@ public class TakingTurnsQueue
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
+            else if (person.Turns < 1)
+            {
+                _people.Enqueue(person);
+            }
+
 
             return person;
         }
