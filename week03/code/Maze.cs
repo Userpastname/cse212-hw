@@ -20,6 +20,22 @@ public class Maze
     private int _currX = 1;
     private int _currY = 1;
 
+    public int getX()
+    {
+        return _currX;
+    }
+    public int getY()
+    {
+        return _currY;
+    }
+    public void setX(int x)
+    {
+        _currX = x;
+    } 
+    public void setY(int y){
+        _currY = y;
+    }
+
     public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap)
     {
         _mazeMap = mazeMap;
@@ -32,6 +48,15 @@ public class Maze
     /// </summary>
     public void MoveLeft()
     {
+        
+        if(_mazeMap[(getX(),getY())][0] == false)
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        else
+        {
+            setX(getX()-1);
+        }
         // FILL IN CODE
     }
 
@@ -41,6 +66,14 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
+        if(_mazeMap[(getX(),getY())][1] == false)
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        else
+        {
+            setX(getX()+1);
+        }
         // FILL IN CODE
     }
 
@@ -50,6 +83,14 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
+        if(_mazeMap[(getX(),getY())][2] == false)
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        else
+        {
+            setY(getY()+1);
+        }
         // FILL IN CODE
     }
 
@@ -59,6 +100,14 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
+        if(_mazeMap[(getX(),getY())][3] == false)
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        else
+        {
+            setY(getY()-1);
+        }
         // FILL IN CODE
     }
 

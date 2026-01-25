@@ -22,7 +22,37 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        string[] worde = words;
+        var pairs= new List<string>();
+        var reverses = new HashSet<string>();
+   
+        foreach (string word in worde)
+        {
+
+            if(reverses.Contains(word) == false)
+            {
+                char[] letters = word.ToCharArray();
+                char[] reverse = new char[2];
+                reverse[0] = letters[1];
+                reverse[1] = letters[0];
+                reverses.Add(word);
+                string rev = new string(reverse);
+                reverses.Add(rev);
+            }
+            else
+            {
+                char[] letters = word.ToCharArray();
+                char[] reverse = new char[2];
+                reverse[0] = letters[1];
+                reverse[1] = letters[0];
+                string rev = new string(reverse);
+                string pair = word + " & " + rev;
+                pairs.Add(pair);
+            }
+
+        }
+
+        return pairs.ToArray();
     }
 
     /// <summary>
@@ -42,8 +72,17 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
+            if(degrees.ContainsKey(fields[3]) == false)
+            {
+                degrees.Add(fields[3], 1);
+            }
+            else
+            {
+                degrees[fields[3]]++;
+            }
             // TODO Problem 2 - ADD YOUR CODE HERE
         }
+
 
         return degrees;
     }
@@ -66,8 +105,58 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
+        Dictionary<char, int> wordOne = new Dictionary<char, int>();
+        Dictionary<char, int> wordTwo = new Dictionary<char, int>();
+        string word001 = word1.ToLower();
+        string word002 = word2.ToLower();
+        string word01 = word001.Replace(" ","");
+        string word02 = word002.Replace(" ","");
+        char[] chars01 = word01.ToCharArray();
+        char[] chars02 = word02.ToCharArray();
+
+        foreach (char c in chars01)
+        {
+            if(wordOne.ContainsKey(c) == false)
+            {
+                wordOne.Add(c, 1);
+            }
+            else
+            {
+                wordOne[c]++;
+            }
+        }
+        foreach (char c in chars02)
+        {
+            if(wordTwo.ContainsKey(c) == false)
+            {
+                wordTwo.Add(c, 1);
+            }
+            else
+            {
+                wordTwo[c]++;
+            }
+        }
+        bool isss = true;
+
+
+        foreach (char c in wordOne.Keys)
+        {
+            if(wordTwo.ContainsKey(c) == true)
+            {
+                if (wordTwo[c] != wordOne[c])
+                {
+                    isss = false;
+                }
+            }
+            else
+            {
+                isss = false;
+            }
+        }
+        
+
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        return isss;
     }
 
     /// <summary>
