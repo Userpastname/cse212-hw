@@ -49,7 +49,7 @@ public class Maze
     public void MoveLeft()
     {
         
-        if(_mazeMap[(getX(),getY())][0] == false)
+        if(_mazeMap[(getX(),getY())][0] == false || getX()==1)
         {
             throw new InvalidOperationException("Can't go that way!");
         }
@@ -66,7 +66,7 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        if(_mazeMap[(getX(),getY())][1] == false)
+        if(_mazeMap[(getX(),getY())][1] == false || getX()==6)
         {
             throw new InvalidOperationException("Can't go that way!");
         }
@@ -83,13 +83,13 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        if(_mazeMap[(getX(),getY())][2] == false)
+        if(_mazeMap[(getX(),getY())][2] == false || getY()==1)
         {
             throw new InvalidOperationException("Can't go that way!");
         }
         else
         {
-            setY(getY()+1);
+            setY(getY()-1);
         }
         // FILL IN CODE
     }
@@ -100,13 +100,13 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        if(_mazeMap[(getX(),getY())][3] == false)
+        if(_mazeMap[(getX(),getY())][3] == false || getY()==6)
         {
             throw new InvalidOperationException("Can't go that way!");
         }
         else
         {
-            setY(getY()-1);
+            setY(getY()+1);
         }
         // FILL IN CODE
     }
