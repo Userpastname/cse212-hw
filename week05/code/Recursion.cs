@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 public static class Recursion
 {
@@ -15,7 +16,16 @@ public static class Recursion
     public static int SumSquaresRecursive(int n)
     {
         // TODO Start Problem 1
-        return 0;
+
+        if (n > 0)
+        {
+            return (int)Math.Pow(n,2) + SumSquaresRecursive(n-1);
+        }
+        else
+        {
+            return 0;
+        }
+           
     }
 
     /// <summary>
@@ -39,6 +49,19 @@ public static class Recursion
     /// </summary>
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
+            if(word.Length == size)
+            {
+                results.Add(word);
+                return;
+            }
+            for(int i =0; i < letters.Length; i++)
+            {
+                string newWord = word + letters[i];
+                string newChars = letters.Replace(Convert.ToString(letters[i]),"");
+
+                PermutationsChoose(results,newChars, size, newWord);
+            }
+
         // TODO Start Problem 2
     }
 
@@ -97,9 +120,20 @@ public static class Recursion
             return 4;
 
         // TODO Start Problem 3
+        if(remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
+        if (remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
 
         // Solve using recursion
         decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        
+        remember.Add(s, ways);
         return ways;
     }
 
@@ -118,8 +152,28 @@ public static class Recursion
     /// </summary>
     public static void WildcardBinary(string pattern, List<string> results)
     {
-        // TODO Start Problem 4
+    int index = pattern.IndexOf('*');
+
+    // Base case: no wildcards left
+    if (index == -1)
+    {
+        results.Add(pattern);
+        return;
     }
+
+    // Replace * with 0
+    WildcardBinary(
+        pattern.Substring(0, index) + "0" + pattern.Substring(index + 1),
+        results
+    );
+
+    // Replace * with 1
+    WildcardBinary(
+        pattern.Substring(0, index) + "1" + pattern.Substring(index + 1),
+        results
+    );
+    }
+
 
     /// <summary>
     /// Use recursion to insert all paths that start at (0,0) and end at the
